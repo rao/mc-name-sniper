@@ -15,7 +15,6 @@ defmodule OgSniper.MixProject do
   def application do
     [
       extra_applications: [:logger, :httpoison],
-      mod: {OgSniper, []}
     ]
   end
 
