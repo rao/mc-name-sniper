@@ -3,7 +3,7 @@ defmodule OgSniper.Utils do
     def username_to_uuid(desired_name) do
         days_ago = :os.system_time(:second) - 3196800
         
-        # In line 5, it's getting that API in default format, then %HTTPoison.Response takes the body of what you want
+        # In line 7, it's getting that API in default format, then %HTTPoison.Response takes the body of what you want
         %HTTPoison.Response{body: body} = HTTPoison.get!("https://api.mojang.com/users/profiles/minecraft/" <> desired_name <> "?at=" <> Integer.to_string(days_ago))
 
         body
@@ -23,9 +23,7 @@ defmodule OgSniper.Utils do
     end
 
     def add_37_days(changedToAt) do
-
         time_now = :os.system_time(:second)
-
         moment_of_change = changedToAt + 3196800
 
         cond do
@@ -41,7 +39,6 @@ defmodule OgSniper.Utils do
         
         body = body
         |> String.replace("OK|", "")
-
     end
 
     def attempt_minecraft_auth(minecraft_email, minecraft_password, captchaToken) do
@@ -55,7 +52,6 @@ defmodule OgSniper.Utils do
         
         body
         |> Poison.decode!
-        |> IO.inspect
         |> Map.get("accessToken")
     end
 
@@ -80,6 +76,5 @@ defmodule OgSniper.Utils do
         {"Content-Type", "application/json"},
         {"User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"}]
         )
-    end
-    
+    end  
 end
