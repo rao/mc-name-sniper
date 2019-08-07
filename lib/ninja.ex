@@ -18,15 +18,16 @@ defmodule OgSniper.Ninja do
         IO.puts "EPOCH timestamp for #{state.desired_name} is #{state.snipe_at_timestamp}"
         IO.puts "Sniping '#{state.desired_name}' in #{round(snipe_in)} seconds"
         Process.send_after(self(), {:start_sniping_process}, round((snipe_in - 75) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 1) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.75) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.1) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.005) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.0017) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.05) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.001) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.002) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.01) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in + 0.1) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.15) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.25) * 1000))
         {:ok, struct(__MODULE__, state)}
     end
 

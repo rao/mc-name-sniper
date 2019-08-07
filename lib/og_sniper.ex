@@ -2,12 +2,12 @@ defmodule OgSniper do
   alias OgSniper.Utils
 
   def start do
-    {:ok, time_to_snipe} = Utils.username_to_uuid("Pumba") 
+    {:ok, time_to_snipe} = Utils.username_to_uuid("Explosive") 
                            |> Utils.get_change_timestamp
                            |> Utils.add_37_days
                            
     OgSniper.Ninja.start_link(%{
-      desired_name: "Pumba", 
+      desired_name: "Explosive", 
       snipe_at_timestamp: time_to_snipe, 
       minecraft_email: "ddadad@rmailcloud.com", 
       minecraft_password: "Krom11!!",
