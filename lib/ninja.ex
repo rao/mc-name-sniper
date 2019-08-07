@@ -18,6 +18,7 @@ defmodule OgSniper.Ninja do
         IO.puts "EPOCH timestamp for #{state.desired_name} is #{state.snipe_at_timestamp}"
         IO.puts "Sniping '#{state.desired_name}' in #{round(snipe_in)} seconds"
         Process.send_after(self(), {:start_sniping_process}, round((snipe_in - 75) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.54) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.47) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.3) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.25) * 1000))
