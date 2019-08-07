@@ -9,7 +9,7 @@ defmodule OgSniper do
     OgSniper.Ninja.start_link(%{
       desired_name: "Asuma", 
       snipe_at_timestamp: time_to_snipe, 
-      minecraft_email: "ddadad@rmailcloud.com", 
+      minecraft_email: "kromislit@gmail.com", 
       minecraft_password: "Krom11!!",
       giftcode: "123 123 1234"})
     :ok
