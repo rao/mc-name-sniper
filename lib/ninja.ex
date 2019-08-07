@@ -18,14 +18,15 @@ defmodule OgSniper.Ninja do
         IO.puts "EPOCH timestamp for #{state.desired_name} is #{state.snipe_at_timestamp}"
         IO.puts "Sniping '#{state.desired_name}' in #{round(snipe_in)} seconds"
         Process.send_after(self(), {:start_sniping_process}, round((snipe_in - 75) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.1) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.005) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.0017) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.25) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.01) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.0024) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001115) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in + 0.001) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.002) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.001115) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.0023) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in + 0.01) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in + 0.1) * 1000))
         {:ok, struct(__MODULE__, state)}
@@ -58,8 +59,9 @@ defmodule OgSniper.Ninja do
 
     def handle_info({:snipe1}, state) do
         IO.puts ("Snipe going through for #{state.desired_name}, let's cook boys")
-
-        OgSniper.Utils.snipe_process(state.access_token, state.desired_name)
+        Task.start(fn -> 
+            OgSniper.Utils.snipe_process(state.access_token, state.desired_name)
+        end)
 
         {:noreply, state}
     end
