@@ -17,11 +17,27 @@ defmodule OgSniper.Ninja do
         snipe_in = state.snipe_at_timestamp - :os.system_time(:second)
         IO.puts "EPOCH timestamp for #{state.desired_name} is #{state.snipe_at_timestamp}"
         IO.puts "Sniping '#{state.desired_name}' in #{round(snipe_in)} seconds"
+
+        # ping -c 10 www.minecraft.net | tail -1| awk -F '/' '{print $5}'
+
         Process.send_after(self(), {:start_sniping_process}, round((snipe_in - 75) * 1000))
+        Process.send_after(self(), {:ninja}, round((snipe_in - 20) * 1000))
+
+        {:ok, struct(__MODULE__, state)}
+    end
+
+    def handle_info({:ninja}, state) do
+        snipe_in = state.snipe_at_timestamp - :os.system_time(:second)
+        latency = GenServer.call(:mojang_latency, :latency)
+        |> round
+        |> IO.inspect
+        IO.puts "Grabbed the average latency to mojang.com. Get ready."
+
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.54) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.47) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.3) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.25) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.1) * 1000) - latency)
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.01) * 1000) - latency)
+        Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000) - latency)
+        Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.01) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.0024) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001115) * 1000))
@@ -32,7 +48,7 @@ defmodule OgSniper.Ninja do
         Process.send_after(self(), {:snipe1}, round((snipe_in + 0.0023) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in + 0.01) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in + 0.1) * 1000))
-        {:ok, struct(__MODULE__, state)}
+        {:noreply, state}
     end
 
     def handle_info({:start_sniping_process}, state) do

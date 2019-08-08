@@ -76,5 +76,9 @@ defmodule OgSniper.Utils do
         {"Content-Type", "application/json"},
         {"User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"}]
         )
-    end  
+    end 
+    
+    # def ping_mojang do
+    #     ping -c 10 www.stackoverflow.com | tail -1| awk -F '/' '{print $5}'
+    # end
 end

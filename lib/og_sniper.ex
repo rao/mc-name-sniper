@@ -1,13 +1,23 @@
 defmodule OgSniper do
   alias OgSniper.Utils
 
+  use Application
+
   def start do
-    {:ok, time_to_snipe} = Utils.username_to_uuid("osp") 
+    import Supervisor.Spec, warn: false
+    children = [
+      supervisor(OgSniper.MojangLatency, [])
+    ]
+    
+    opts = [strategy: :one_for_one, name: OgSniper.Supervisor]
+    Supervisor.start_link(children, opts)
+
+    {:ok, time_to_snipe} = Utils.username_to_uuid("Feb") 
                            |> Utils.get_change_timestamp
                            |> Utils.add_37_days
                            
     OgSniper.Ninja.start_link(%{
-      desired_name: "osp", 
+      desired_name: "Feb", 
       snipe_at_timestamp: time_to_snipe, 
       minecraft_email: "kromislit@gmail.com", 
       minecraft_password: "Krom11!!",
