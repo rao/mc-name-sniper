@@ -21,7 +21,7 @@ defmodule OgSniper.Ninja do
         # ping -c 10 www.minecraft.net | tail -1| awk -F '/' '{print $5}'
 
         Process.send_after(self(), {:start_sniping_process}, round((snipe_in - 75) * 1000))
-        Process.send_after(self(), {:ninja}, round((snipe_in - 20) * 1000))
+        Process.send_after(self(), {:ninja}, round((snipe_in - 15) * 1000))
 
         {:ok, struct(__MODULE__, state)}
     end
