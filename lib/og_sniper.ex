@@ -12,12 +12,12 @@ defmodule OgSniper do
     opts = [strategy: :one_for_one, name: OgSniper.Supervisor]
     Supervisor.start_link(children, opts)
 
-    {:ok, time_to_snipe} = Utils.username_to_uuid("Amenity") 
+    {:ok, time_to_snipe} = Utils.username_to_uuid("xxxtentacio") 
                            |> Utils.get_change_timestamp
                            |> Utils.add_37_days
                            
     OgSniper.Ninja.start_link(%{
-      desired_name: "Amenity", 
+      desired_name: "xxxtentacio", 
       snipe_at_timestamp: time_to_snipe, 
       minecraft_email: "kromislit@gmail.com", 
       minecraft_password: "Krom11!!",
