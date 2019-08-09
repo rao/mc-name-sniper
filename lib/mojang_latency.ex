@@ -17,11 +17,12 @@ defmodule OgSniper.MojangLatency do
     end
 
     def handle_info(:fetch, state) do
-        {microseconds, result} = :timer.tc(fn -> HTTPoison.get!("https://api.mojang.com/user/profiles/c8a57bd5d5f44e8fbd1ed1760feff0cd/names") end)
+        {microseconds, result} = :timer.tc(fn -> HTTPoison.get!("https://authserver.mojang.com/authenticate") end) # https://api.mojang.com/user/profiles/c8a57bd5d5f44e8fbd1ed1760feff0cd/names
         milliseconds = System.convert_time_unit(microseconds, :microsecond, :millisecond)
         IO.puts milliseconds
         
         Process.send_after(self(), :fetch, 5000)
-        {:noreply, Enum.slice([milliseconds | state], 0..99)}
+        {:noreply, Enum.slice([milliseconds | state], 0..49)}
+
     end
 end

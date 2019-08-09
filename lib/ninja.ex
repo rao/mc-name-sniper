@@ -33,21 +33,26 @@ defmodule OgSniper.Ninja do
         |> IO.inspect
         IO.puts "Grabbed the average latency to mojang.com. Get ready."
 
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.54) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.54) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.19) * 1000) - latency)
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.15) * 1000) - latency)
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.1) * 1000) - latency)
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.01) * 1000) - latency)
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001) * 1000) - latency)
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.0001) * 1000) - latency)
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.00001) * 1000) - latency)
         Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000) - latency)
-        Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.01) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.0024) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001115) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.001) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.001115) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.0023) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.01) * 1000))
-        Process.send_after(self(), {:snipe1}, round((snipe_in + 0.1) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.01) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.0024) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001115) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in + 0.001) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in + 0.001115) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in + 0.0023) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in + 0.01) * 1000))
+        # Process.send_after(self(), {:snipe1}, round((snipe_in + 0.1) * 1000))
         {:noreply, state}
     end
 
