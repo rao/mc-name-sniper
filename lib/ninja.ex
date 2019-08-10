@@ -87,7 +87,7 @@ defmodule OgSniper.Ninja do
     end
 
     def handle_info({:snipe1}, state) do
-        IO.puts ("Snipe going through for #{state.desired_name}, let's cook boys")
+        IO.puts ("Snipe going through for #{state.desired_name}.")
         Task.start(fn -> 
             OgSniper.Utils.snipe_process(state.access_token, state.desired_name)
         end)
