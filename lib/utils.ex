@@ -67,7 +67,7 @@ defmodule OgSniper.Utils do
         )
 
         HTTPoison.post!("https://api.mojang.com/token/redeem", Poison.encode!(%{
-            "code" => "A1A1A-B2B2B-C3C3C-D4D4D-E5E5E",
+            "code" => "123 123 1234",
             "languageCode" => "en-us",
             "productType:" => "GAME"
             }),

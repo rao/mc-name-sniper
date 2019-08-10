@@ -34,6 +34,9 @@ defmodule OgSniper.Ninja do
         IO.puts "Grabbed the average latency to mojang.com. Get ready."
 
         # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.54) * 1000))
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.6) * 1000) - latency)
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.5) * 1000) - latency)
+        Process.send_after(self(), {:snipe1}, round((snipe_in - 0.4) * 1000) - latency)
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.19) * 1000) - latency)
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.15) * 1000) - latency)
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.1) * 1000) - latency)
