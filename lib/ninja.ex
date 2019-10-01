@@ -74,7 +74,7 @@ defmodule OgSniper.Ninja do
     end
 
     def handle_info({:get_captcha_token}, state) do
-        %HTTPoison.Response{body: body} = HTTPoison.get!("https://2captcha.com/res.php?key=bbe7d8b5a2b151828c8268ae93334bae&action=get&id=#{state.captcha_id}")
+        %HTTPoison.Response{body: body} = HTTPoison.get!("https://2captcha.com/res.php?key=2captchakey&action=get&id=#{state.captcha_id}")
         captcha_token = body |> String.replace("OK|", "")
 
         Process.send_after(self(), {:minecraft_auth}, 2000)
