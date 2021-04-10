@@ -18,8 +18,6 @@ defmodule OgSniper.Ninja do
         IO.puts "EPOCH timestamp for #{state.desired_name} is #{state.snipe_at_timestamp}"
         IO.puts "Sniping '#{state.desired_name}' in #{round(snipe_in)} seconds"
 
-        # ping -c 10 www.minecraft.net | tail -1| awk -F '/' '{print $5}'
-
         Process.send_after(self(), {:start_sniping_process}, round((snipe_in - 75) * 1000))
         Process.send_after(self(), {:ninja}, round((snipe_in - 15) * 1000))
 
@@ -33,7 +31,6 @@ defmodule OgSniper.Ninja do
         |> IO.inspect
         IO.puts "Grabbed the average latency to mojang.com. Get ready."
 
-        # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.54) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.6) * 1000) - latency)
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.5) * 1000) - latency)
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.4) * 1000) - latency)
@@ -50,17 +47,6 @@ defmodule OgSniper.Ninja do
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.000000001) * 1000) - latency)
         Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001) * 1000))
         Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000) - latency)
-        # Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000))
-        # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.01) * 1000))
-        # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.0024) * 1000))
-        # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001115) * 1000))
-        # Process.send_after(self(), {:snipe1}, round((snipe_in - 0.001) * 1000))
-        # Process.send_after(self(), {:snipe1}, round((snipe_in) * 1000))
-        # Process.send_after(self(), {:snipe1}, round((snipe_in + 0.001) * 1000))
-        # Process.send_after(self(), {:snipe1}, round((snipe_in + 0.001115) * 1000))
-        # Process.send_after(self(), {:snipe1}, round((snipe_in + 0.0023) * 1000))
-        # Process.send_after(self(), {:snipe1}, round((snipe_in + 0.01) * 1000))
-        # Process.send_after(self(), {:snipe1}, round((snipe_in + 0.1) * 1000))
         {:noreply, state}
     end
 
@@ -68,14 +54,15 @@ defmodule OgSniper.Ninja do
         captcha_id = OgSniper.Utils.make_indian_worker_get_captcha_id
         IO.puts ("It's time to log into Minecraft for the account #{state.desired_name}")
 
-        Process.send_after(self(), {:get_captcha_token}, 20000)
+        Process.send_after(self(), {:get_captcha_token}, 40000)
 
         {:noreply, %{state | captcha_id: captcha_id}}
     end
 
     def handle_info({:get_captcha_token}, state) do
-        %HTTPoison.Response{body: body} = HTTPoison.get!("https://2captcha.com/res.php?key=2captchakey&action=get&id=#{state.captcha_id}")
+        %HTTPoison.Response{body: body} = HTTPoison.get!("https://2captcha.com/res.php?key=2CAPTCHAKEY&action=get&id=#{state.captcha_id}")
         captcha_token = body |> String.replace("OK|", "")
+        IO.puts captcha_token
 
         Process.send_after(self(), {:minecraft_auth}, 2000)
 
@@ -91,7 +78,7 @@ defmodule OgSniper.Ninja do
 
     def handle_info({:snipe1}, state) do
         IO.puts ("Snipe going through for #{state.desired_name}.")
-        Task.start(fn -> 
+        Task.start(fn ->
             OgSniper.Utils.snipe_process(state.access_token, state.desired_name)
         end)
 

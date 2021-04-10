@@ -22,7 +22,7 @@ defmodule OgSniper.MixProject do
   defp deps do
     [
       {:poison, "~> 3.1"},
-      {:httpoison, "~> 1.4"}
+      {:httpoison, "~> 1.6"}
     ]
   end
 end
