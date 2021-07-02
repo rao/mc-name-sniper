@@ -1,6 +1,6 @@
 # OgSniper
 
-**TODO: Add description**
+A sniper to snipe highly wanted Minecraft usernames, very quickly. Uses the multi-threaded feature in Elixir to bypass Minecraft's antibot, generates GCaptcha tokens, calculates the exact time a name is released, calculates the ping between servers, and snipes at the millisecond, all under a minute.
 
 ## Installation
 
